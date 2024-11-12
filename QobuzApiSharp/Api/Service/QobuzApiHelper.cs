@@ -25,15 +25,19 @@ namespace QobuzApiSharp.Service
         /// </summary>
         private static void FetchBundleString()
         {
-            using (WebClient QobuzWebClient = new WebClient())
+            using (HttpClient QobuzWebClient = new HttpClient())
             {
-                string bundleHTML = QobuzWebClient.DownloadString($"{QobuzApiConstants.WEB_PLAYER_BASE_URL}/login");
+                var getTask = QobuzWebClient.GetStringAsync($"{QobuzApiConstants.WEB_PLAYER_BASE_URL}/login");
+                getTask.Wait();
+                string bundleHTML = getTask.Result;
 
                 try
                 {
                     // Grab link to bundle.js
                     string bundleSuffix = Regex.Match(bundleHTML, "<script src=\"(?<bundleJS>\\/resources\\/\\d+\\.\\d+\\.\\d+-[a-z]\\d{3}\\/bundle\\.js)").Groups[1].Value;
-                    CachedBundleString = QobuzWebClient.DownloadString($"{QobuzApiConstants.WEB_PLAYER_BASE_URL}{bundleSuffix}");
+                    var getBundleTask = QobuzWebClient.GetStringAsync($"{QobuzApiConstants.WEB_PLAYER_BASE_URL}{bundleSuffix}");
+                    getBundleTask.Wait();
+                    CachedBundleString = getBundleTask.Result;
                 }
                 catch (Exception ex)
                 {
