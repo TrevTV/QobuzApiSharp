@@ -33,5 +33,8 @@ namespace QobuzApiSharp.Models.Content
 
         [JsonProperty("code")]
         public string Code { get; set; }
+
+        [JsonProperty("sample")]
+        public bool? Sample { get; set; }
     }
 }
