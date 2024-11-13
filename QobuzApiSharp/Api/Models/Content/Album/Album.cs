@@ -188,5 +188,21 @@ namespace QobuzApiSharp.Models.Content
 
         [JsonProperty("version")]
         public string Version { get; set; }
+
+        public string CompleteTitle
+        {
+            get
+            {
+                var title = Title.Trim();
+
+                if (title.EndsWith(" (Explicit)"))
+                    title = title[..title.IndexOf(" (Explicit)")].Trim();
+
+                if (!string.IsNullOrEmpty(Version))
+                    title = $"{title} ({Version})";
+
+                return title;
+            }
+        }
     }
 }

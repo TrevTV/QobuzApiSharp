@@ -97,5 +97,21 @@ namespace QobuzApiSharp.Models.Content
 
         [JsonProperty("work")]
         public string Work { get; set; }
+
+        public string CompleteTitle
+        {
+            get
+            {
+                var title = Title.Trim();
+
+                if (title.EndsWith(" (Explicit)"))
+                    title = title[..title.IndexOf(" (Explicit)")].Trim();
+
+                if (!string.IsNullOrEmpty(Version))
+                    title = $"{title} ({Version})";
+
+                return title;
+            }
+        }
     }
 }
