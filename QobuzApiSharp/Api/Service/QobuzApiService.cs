@@ -16,7 +16,7 @@ namespace QobuzApiSharp.Service
     /// </summary>
     public sealed partial class QobuzApiService : IDisposable
     {
-        private readonly HttpClient QobuzHttpClient;
+        public readonly HttpClient QobuzHttpClient;
 
         /// <summary>
         /// Gets the app id.
