@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 
 namespace QobuzApiSharp.Models.Content
@@ -109,6 +109,11 @@ namespace QobuzApiSharp.Models.Content
 
                 if (!string.IsNullOrEmpty(Version))
                     title = $"{title} ({Version})";
+
+                // Is this the correct format? I am not sure.
+                // This is purely based on https://www.qobuz.com/us-en/album/the-world-of-hans-zimmer-part-ii-a-new-dimension-hans-zimmer/py9kvu4v2arvb
+                if (!string.IsNullOrEmpty(Work))
+                    title = $"{Work}: {title}";
 
                 return title;
             }
